@@ -1,9 +1,6 @@
 package org.lesson.java.videogames.videogames.model;
 
 import java.util.List;
-
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +15,7 @@ public class Genere {
     @OneToMany(mappedBy = "genere")
     private List<Videogame> videogame;
 
+    // getter e setter di videogame per rendere bidirezionale
     public List<Videogame> getVideogame() {
         return this.videogame;
     }
@@ -36,7 +34,7 @@ public class Genere {
     private String nameGenere;
     @NotBlank(message = "Inserire la descrizione")
     private String descrizioneGenere;
-
+// creo getter e setter 
     public Integer getId() {
         return this.id;
     }

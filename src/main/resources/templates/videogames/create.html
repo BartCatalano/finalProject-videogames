@@ -6,12 +6,17 @@
 <body>
     <!-- Navbar -->
     <div th:replace="~{fragments/navBar :: navbar}"></div>
-<h1>sono Create Videogames</h1>    
-
-
 <h1 class="text-center">Sono pagina di Creazione Videogame</h1>
+
 <div class="text-center row justify-content-center">
+    <!-- creo il form di creazione con action base a differenza dell update dove prendo l id -->
     <form id="videogameForm" th:action="@{/videogames/create}" method="post" th:object="${videogame}">
+        <!-- creo il checkbox per assegnare le piattaforme -->
+        <div th:each="piattaforma : ${piattaforme}">
+            <input type="checkbox" th:value="${piattaforma.id}" th:field="*{piattaforma}" >
+            <label for="${piattaforma}">
+            <div th:text="${piattaforma.nomePiattaforma}"></div></label>
+        </div>
            
         <div class="mb-3 ps-2" th:if="${#fields.hasErrors()}">
           <ul class="alert alert-danger">

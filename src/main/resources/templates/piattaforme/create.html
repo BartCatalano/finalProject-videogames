@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Create Piattaforme</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <div th:replace="~{fragments/navBar :: navbar}"></div>
+<h1>sono Create piattaforme</h1>    
+
+
+<h1 class="text-center">Sono pagina di Creazione Piattaforme</h1>
+<div class="text-center row justify-content-center">
+    <!-- creo il form di creazione con action base a differenza dell update dove prendo l id -->
+    <form id="piattaformaForm" th:action="@{/piattaforma/create}" method="post" th:object="${piattaforma}">
+
+       
+        <div class="mb-3 ps-2" th:if="${#fields.hasErrors()}">
+          <ul class="alert alert-danger">
+              <li th:each="error : ${#fields.allErrors()}" th:text="${error}"/>
+          </ul>
+      </div>   
+      <div>
+            <label class="form-label" for="title">Nome Piattaforma</label>
+            <input class="form-control" type="text" id="title" th:field="*{nomePiattaforma}">
+             
+                <label class="form-label" for="logo">Logo</label>
+                <input type="url" id="logo" th:field="*{logo}" class="form-control">
+            </div>
+
+             <div>
+                <label class="form-label" for="prezzoPiattaforma">Prezzo</label>
+                 <input type="number" step="0.1" name="prezzoPiattaforma" th:field="*{prezzoPiattaforma}" class="form-control">
+             </div>
+       
+
+         
+           
+        <button type="submit" class="btn btn-primary mt-3">
+            Inserisci nuova piattaforma
+         </button>
+    </form></div> 
+
+    <!-- Script Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

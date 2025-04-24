@@ -20,6 +20,7 @@ public class Piattaforma {
  @JsonBackReference
  private List<Videogame> videogame;
 
+//  getter e setter di videogame per rendere bidirezionali
     public List<Videogame> getVideogame() {
         return this.videogame;
     }
@@ -28,6 +29,8 @@ public class Piattaforma {
         this.videogame = videogame;
     }
 
+
+// creo le var di istanza della piattaforma
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -36,10 +39,12 @@ public class Piattaforma {
     private String nomePiattaforma;
     
     private String logo;
-    @NotNull(message = "inserire prezzo dell videogame")
-    private BigDecimal prezzo; 
+
+    @NotNull(message = "inserire prezzo del videogame")
+    private BigDecimal prezzoPiattaforma; 
 
 
+    // creo getter e setter
     public Integer getId() {
         return this.id;
     }
@@ -64,12 +69,12 @@ public class Piattaforma {
         this.logo = logo;
     }
 
-    public BigDecimal getPrezzo() {
-        return this.prezzo;
+    public BigDecimal getPrezzoPiattaforma() {
+        return this.prezzoPiattaforma;
     }
 
-    public void setPrezzo(BigDecimal prezzo) {
-        this.prezzo = prezzo;
+    public void setPrezzoPiattaforma(BigDecimal prezzoPiattaforma) {
+        this.prezzoPiattaforma = prezzoPiattaforma;
     }
 
     

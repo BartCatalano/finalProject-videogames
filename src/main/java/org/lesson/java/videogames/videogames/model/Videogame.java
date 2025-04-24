@@ -2,11 +2,7 @@ package org.lesson.java.videogames.videogames.model;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,11 +18,14 @@ import jakarta.validation.constraints.NotNull;
 // inserisco annotation che rende un entità la classe videogame
 @Entity
 public class Videogame {
+
+
+
     // creo la relazione tra videogame e generi con getter e setter
     @ManyToOne
     @JoinColumn(name = "genere_id")
     private Genere genere;
-
+//    getter e setter del genere per rendere bidirezionali
     public Genere getGenere() {
         return this.genere;
     }
@@ -34,6 +33,9 @@ public class Videogame {
     public void setGenere(Genere genere) {
         this.genere = genere;
     }
+
+
+
 
     // creo la relazione many to many con le piattaforme
     @ManyToMany
@@ -47,7 +49,7 @@ public class Videogame {
     // inserisco la lista di piattaforme associate al videogame
     private List<Piattaforma> piattaforma;
 
-
+//    getter e setter della piattaforma associata per rendere bidirezionale
     public List<Piattaforma> getPiattaforma() {
         return this.piattaforma;
     }
@@ -55,6 +57,8 @@ public class Videogame {
     public void setPiattaforma(List<Piattaforma> piattaforma) {
         this.piattaforma = piattaforma;
     }
+
+
 
 
     // creo le var di istanza che saranno le colonne della tabella videogames
@@ -72,6 +76,8 @@ public class Videogame {
     @NotNull(message = "inserire prezzo dell videogame")
     private BigDecimal prezzo; 
 
+
+    // creo getter e setter
     public Integer getId() {
         return this.id;
     }

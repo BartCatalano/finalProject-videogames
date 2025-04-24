@@ -22,10 +22,16 @@
                         <div th:replace="~{fragments/fragments :: button('/', 'Home')}"></div>
                     </li>
                     <li class="nav-item">
-                        <div th:replace="~{fragments/fragments :: button('/videogames', 'List')}"></div>
+                        <div th:replace="~{fragments/fragments :: button('/videogames', 'Game List')}"></div>
+                    </li>
+                    <li class="nav-item">
+                        <div th:replace="~{fragments/fragments :: button('/piattaforme', 'Piattaforme')}"></div>
                     </li>
                     <li class="nav-item">
                         <div th:replace="~{fragments/fragments :: button('/videogames/create', 'New Videogame')}"></div>
+                    </li>
+                    <li class="nav-item">
+                        <div th:replace="~{fragments/fragments :: button('/piattaforme/create', 'New Piattaforma')}"></div>
                     </li>
                 </ul>
             </div>

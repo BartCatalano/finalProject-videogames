@@ -11,7 +11,14 @@
 
 <h1 class="text-center">Sono pagina di Creazione Videogame</h1>
 <div class="text-center row justify-content-center">
+    <!-- creo il form con action che prende l'id del videogame per poi modificarlo quando usiamo il tasto   -->
     <form id="videogameForm" th:action="@{/videogames/edit/{id}(id = ${videogame.id})}" method="post" th:object="${videogame}">
+
+        <div th:each="piattaforma : ${piattaforme}">
+            <input type="checkbox" th:value="${piattaforma.id}" th:field="*{piattaforma}" >
+            <label for="${piattaforma}">
+            <div th:text="${piattaforma.nomePiattaforma}"></div></label>
+        </div>
            
         <div class="mb-3 ps-2" th:if="${#fields.hasErrors()}">
           <ul class="alert alert-danger">
@@ -33,7 +40,7 @@
                 <label class="form-label" for="prezzo">Prezzo</label>
                 <input type="number" step="0.01" name="prezzo"th:field="*{prezzo}" class="form-control" />
             </div>
-           
+           <!-- creo il tasto submit che sovrascrive il videogame -->
         <button type="submit" class="btn btn-primary mt-3">
             Modifica Videogame
          </button>
