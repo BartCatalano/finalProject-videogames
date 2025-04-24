@@ -1,17 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <title>Create Videogames</title>
+    <title>Edita Videogames</title>
 </head>
 <body>
     <!-- Navbar -->
     <div th:replace="~{fragments/navBar :: navbar}"></div>
-<h1>sono Create Videogames</h1>    
+<h1>sono Edita Videogames</h1>    
 
 
 <h1 class="text-center">Sono pagina di Creazione Videogame</h1>
 <div class="text-center row justify-content-center">
-    <form id="videogameForm" th:action="@{/videogames/create}" method="post" th:object="${videogame}">
+    <form id="videogameForm" th:action="@{/videogames/edit/{id}(id = ${videogame.id})}" method="post" th:object="${videogame}">
            
         <div class="mb-3 ps-2" th:if="${#fields.hasErrors()}">
           <ul class="alert alert-danger">
@@ -35,7 +35,7 @@
             </div>
            
         <button type="submit" class="btn btn-primary mt-3">
-            Inserisci nuovo Videogame
+            Modifica Videogame
          </button>
     </form></div> 
 

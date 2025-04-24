@@ -22,6 +22,7 @@
                 <p class="card-text">
                     Prezzo: <span th:text="${videogame.prezzo}"></span>
                 </p>
+                 <a   class="btn btn-info btn-sm" th:href="@{/videogames/edit/{id} (id=${videogame.id})}" >Modifica Dati </a>
             </div>
          </div>
     </div>

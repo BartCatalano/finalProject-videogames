@@ -32,7 +32,7 @@ public class Genere {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "inserire il nome della pizza")
+    @NotBlank(message = "inserire il nome del genere")
     private String nameGenere;
     @NotBlank(message = "Inserire la descrizione")
     private String descrizioneGenere;
