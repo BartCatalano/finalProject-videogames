@@ -14,9 +14,9 @@
         <div class="row">
             <!-- ittero sui videogame con thymeleaf -->
             <div th:each="videogame : ${videogames}" class="col-md-4 mb-4">
-                <div class="card">
+                <div style="width: 300px; height: 550px; object-fit: contain;" class="card d-flex justify-content-center align-items-center">
                     <h5 class="card-tittle" th:text="${videogame.title}"></h5>
-                    <img th:src="@{${videogame.foto}}" class="card-img-top" alt="Immagine videogame">
+                    <img style="width: 200px; height: 160px; object-fit: contain;" th:src="@{${videogame.foto}}" class="card-img-top" alt="Immagine videogame">
                     <div class="card-body d-flex flex-column">
                         <p class="card-text" th:text="${videogame.descrizione}"></p>
                         <p class="card-text">

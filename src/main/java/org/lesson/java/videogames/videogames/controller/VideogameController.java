@@ -5,6 +5,9 @@ import org.lesson.java.videogames.videogames.model.Videogame;
 import org.lesson.java.videogames.videogames.repository.GenereRepository;
 import org.lesson.java.videogames.videogames.repository.PiattaformaRepository;
 import org.lesson.java.videogames.videogames.repository.VideogameRepository;
+import org.lesson.java.videogames.videogames.service.GenereService;
+import org.lesson.java.videogames.videogames.service.PiattaformaService;
+import org.lesson.java.videogames.videogames.service.VideogameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,23 +32,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/videogames")
 public class VideogameController {
     // uso annotation autowired per creare in automatico l'oggetto che estende
-    // l'interfaccia per la repository
-    @Autowired
-    private VideogameRepository videogameRepository;
-    @Autowired
-    private PiattaformaRepository piattaformaRepository;
-    @Autowired
-    private GenereRepository genereRepository;
+    //  service che contiene la logica della repository 
+ 
+@Autowired
+private VideogameService videoService;
+@Autowired
+private PiattaformaService piService;
+@Autowired 
+private GenereService geService;
 
     // inizio con la index
 
     @GetMapping()
     public String getAllVideogames(Model model) {
         // prendo la lista di tutti i videogames
-        List<Videogame> videogame = videogameRepository.findAll();
+        List<Videogame> videogame = videoService.findAllVideogame();
         model.addAttribute("videogames",videogame);
-        model.addAttribute("piattaforme", piattaformaRepository.findAll());
-        model.addAttribute("generi", genereRepository.findAll());
+        model.addAttribute("piattaforme", piService.findAllPiattaforma());
+        model.addAttribute("generi", geService.findAllGenere());
         return "videogames/index";
     }
 
@@ -55,8 +59,8 @@ public class VideogameController {
     public String createVideogame(Model model) {
         // creo un oggetto vuoto di tipo videogame
         model.addAttribute("videogame", new Videogame());
-        model.addAttribute("piattaforme", piattaformaRepository.findAll());
-        model.addAttribute("generi", genereRepository.findAll());
+        model.addAttribute("piattaforme", piService.findAllPiattaforma());
+        model.addAttribute("generi", geService.findAllGenere());
         // mando la pagina html del create
         return "videogames/create";
     }
@@ -66,7 +70,7 @@ public class VideogameController {
     public String saveVideogame(@Valid @ModelAttribute ("videogame") Videogame videogameForm, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
             return "videogames/create";}
-            videogameRepository.save(videogameForm);
+            videoService.create(videogameForm);
         
         return "redirect:/videogames";
     }
@@ -76,9 +80,9 @@ public class VideogameController {
     // inserisco la variabile per prendere l id insieme al model
     public String editVideogame(@PathVariable Integer id, Model model) {
         // al model uso la repo per prendere per id
-        model.addAttribute("videogame", videogameRepository.findById(id).get());
-        model.addAttribute("piattaforme", piattaformaRepository.findAll());
-        model.addAttribute("generi", genereRepository.findAll());
+        model.addAttribute("videogame", videoService.getById(id));
+        model.addAttribute("piattaforme", piService.findAllPiattaforma());
+        model.addAttribute("generi", geService.findAllGenere());
          return "videogames/edit";
     }
 
@@ -88,30 +92,31 @@ public class VideogameController {
          if(bindingResult.hasErrors()){
             return "videogames/edit";
          }
-        videogameRepository.save(forVideogame);
+         videoService.create(forVideogame);
         return "redirect:/videogames";
     }
     
     // DELETE
     @PostMapping("delete/{id}")
     public String deleteVideogame(@PathVariable ("id") Integer id) {
-        videogameRepository.deleteById(id);
+        videoService.delete(id);
         return "redirect:/videogames";
     }
 
     // SHOW/DETTAGLIO
-// per creare lo show della pizza selezionata ho bisogno di tutta la lista e poi paragonare l'id selezionato con un ciclo for, quando lo trova mi restituisce il videogame che corrisponde lo salvo nel model e e lo mostro in pagina
+// per creare lo show del videogame selezionata ho bisogno di tutta la lista e poi paragonare l'id selezionato con un ciclo for, quando lo trova mi restituisce il videogame che corrisponde lo salvo nel model e e lo mostro in pagina
     @GetMapping("/{id}")
     public String dettaglioVideogame(@PathVariable Integer id, Model model) {
         // prendo tutti i videogame
-        List<Videogame> videogames = videogameRepository.findAll();
+        List<Videogame> videogames = videoService.findAllVideogame();
         // ora li ciclo per controllarli tutti
         for (Videogame videogame : videogames){
             // costrutto if per la corrispondenza
             if(videogame.getId() == id){
                 // ora al model aggiungo il videogame corrispondente
                 model.addAttribute("videogame", videogame);
-                model.addAttribute("piattaforme", piattaformaRepository.findAll());
+                model.addAttribute("piattaforme", piService.findAllPiattaforma());
+        model.addAttribute("generi", geService.findAllGenere());
                 return "videogames/dettaglio";
             }  } 
         // nel model inserisco il non trovato in caso di mancanza di corrispondenza

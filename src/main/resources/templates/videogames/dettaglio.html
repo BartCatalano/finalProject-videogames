@@ -19,6 +19,8 @@
         <div class="card-body">
           <h5 th:text="${videogame.title}" class="card-title"></h5>
           <p th:text="${videogame.descrizione}" class="card-text"></p>
+          <div th:each="genere : ${videogame.getGenere()}"> Genere:
+            <h4 th:text="${genere.nameGenere}"></h4>
           <span>prezzo:<p th:text="${videogame.prezzo}" class="card-text"></p></span>
           <div class="row">
             <div class="col-md-3 mb-4" th:each="piattaforma : ${videogame.getPiattaforma()}">

@@ -2,8 +2,7 @@ package org.lesson.java.videogames.videogames.controller;
 
 import java.util.List;
 import org.lesson.java.videogames.videogames.model.Piattaforma;
-import org.lesson.java.videogames.videogames.model.Videogame;
-import org.lesson.java.videogames.videogames.repository.PiattaformaRepository;
+import org.lesson.java.videogames.videogames.service.PiattaformaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +19,14 @@ import jakarta.validation.Valid;
 public class PiattaformeController {
 
     @Autowired
-    private PiattaformaRepository piattaformaRepository;
+    private PiattaformaService piService;
 
 
     // prendo tutte le piattaforme
      @GetMapping()
     public String getAllPiattaforme(Model model) {
         // prendo la lista di tutti i videogames
-        List<Piattaforma> piattaforma = piattaformaRepository.findAll();
+        List<Piattaforma> piattaforma = piService.findAllPiattaforma();
         model.addAttribute("piattaforme",piattaforma);
         return "piattaforme/index";
     }
@@ -47,7 +46,7 @@ public class PiattaformeController {
     public String savePittaforma(@Valid @ModelAttribute ("piattaforma") Piattaforma piattaformaForm, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
             return "piattaforme/create";}
-            piattaformaRepository.save(piattaformaForm);
+            piService.create(piattaformaForm);
         
         return "redirect:/piattaforme";
     }
@@ -57,7 +56,7 @@ public class PiattaformeController {
     // inserisco la variabile per prendere l id insieme al model
     public String editPiattaforma(@PathVariable Integer id, Model model) {
         // al model uso la repo per prendere per id
-        model.addAttribute("piattaforma", piattaformaRepository.findById(id).get());
+        model.addAttribute("piattaforma", piService.getById(id));
          return "piattaforme/edit";
     }
 
@@ -67,7 +66,7 @@ public class PiattaformeController {
          if(bindingResult.hasErrors()){
             return "piattaforme/edit";
          }
-        piattaformaRepository.save(piattaformaForm);
+         piService.create(piattaformaForm);
         return "redirect:/piattaforme";
     }
 
@@ -78,7 +77,7 @@ public class PiattaformeController {
     // DELETE
     @PostMapping("delete/{id}")
     public String deletePiattaforma(@PathVariable ("id") Integer id) {
-        piattaformaRepository.deleteById(id);
+        piService.delete(id);
         return "redirect:/piattaforme";
     }
 

@@ -12,7 +12,7 @@
 <h1 class="text-center">Sono pagina di Creazione Piattaforme</h1>
 <div class="text-center row justify-content-center">
     <!-- creo il form di creazione con action base a differenza dell update dove prendo l id -->
-    <form id="piattaformaForm" th:action="@{/piattaforma/create}" method="post" th:object="${piattaforma}">
+    <form id="piattaformaForm" th:action="@{/piattaforme/create}" method="post" th:object="${piattaforma}">
 
        
         <div class="mb-3 ps-2" th:if="${#fields.hasErrors()}">

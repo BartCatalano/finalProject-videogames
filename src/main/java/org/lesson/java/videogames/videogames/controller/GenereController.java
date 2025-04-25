@@ -5,6 +5,9 @@ import org.lesson.java.videogames.videogames.model.Genere;
 import org.lesson.java.videogames.videogames.model.Piattaforma;
 import org.lesson.java.videogames.videogames.repository.GenereRepository;
 import org.lesson.java.videogames.videogames.repository.VideogameRepository;
+import org.lesson.java.videogames.videogames.service.GenereService;
+import org.lesson.java.videogames.videogames.service.PiattaformaService;
+import org.lesson.java.videogames.videogames.service.VideogameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,18 +25,18 @@ import jakarta.validation.Valid;
 public class GenereController {
 
     @Autowired
-    private GenereRepository genereRepository;
-    @Autowired
-    private VideogameRepository videogameRepository;
+private VideogameService videoService;
+@Autowired 
+private GenereService geService;
 
 
     // prendo tutti i generi
      @GetMapping()
     public String getAllGenere(Model model) {
         // prendo la lista di tutti e generi e dei videogames
-        List<Genere> genere = genereRepository.findAll();
+        List<Genere> genere = geService.findAllGenere();
         model.addAttribute("generi",genere);
-        model.addAttribute("videogames", videogameRepository.findAll());
+        model.addAttribute("videogames", videoService.findAllVideogame());
         return "generi/index";
     }
 
@@ -53,7 +56,7 @@ public class GenereController {
     public String saveGenere(@Valid @ModelAttribute ("genere") Genere genereForm, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
             return "generi/create";}
-            genereRepository.save(genereForm);
+            geService.create(genereForm);
         
         return "redirect:/generi";
     }
@@ -61,7 +64,7 @@ public class GenereController {
      // DELETE
     @PostMapping("delete/{id}")
     public String deleteGenere(@PathVariable ("id") Integer id) {
-        genereRepository.deleteById(id);
+        geService.delete(id);
         return "redirect:/generi";
     }
 
@@ -71,7 +74,7 @@ public class GenereController {
     // inserisco la variabile per prendere l id insieme al model
     public String editGenere(@PathVariable Integer id, Model model) {
         // al model uso la repo per prendere per id
-        model.addAttribute("genere", genereRepository.findById(id).get());
+        model.addAttribute("genere", geService.getById(id));
          return "generi/edit";
     }
 
@@ -81,7 +84,7 @@ public class GenereController {
          if(bindingResult.hasErrors()){
             return "generi/edit";
          }
-        genereRepository.save(genereForm);
+         geService.create(genereForm);
         return "redirect:/generi";
     }
 
