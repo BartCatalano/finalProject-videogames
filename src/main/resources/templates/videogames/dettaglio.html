@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Dettails</title>
+</head>
+<body class="bg-secondary">
+    <!-- Navbar -->
+    <div th:replace="~{fragments/navBar :: navbar}"></div>
+
+
+   
+
+ <!-- Contenuto principale -->
+ <div class="container text-center mt-5">
+    <h1 class="mb-3 p-3 text-light bg-primary-subtle border border-primary-subtle rounded-3" >dettaglio di [[${videogame.title}]]</h1>
+   <div class="d-flex justify-content-center align-items-center">
+    <div class="card" style="width: 18rem;">
+        <img th:src="@{${videogame.foto}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 th:text="${videogame.title}" class="card-title"></h5>
+          <p th:text="${videogame.descrizione}" class="card-text"></p>
+          <span>prezzo:<p th:text="${videogame.prezzo}" class="card-text"></p></span>
+          <div class="row">
+            <div class="col-md-3 mb-4" th:each="piattaforma : ${videogame.getPiattaforma()}">
+                <img class="card-img-top mx-auto mt-3 " style="max-width: 20px; max-height: 20px; object-fit: contain;" alt="logo piattaforma" th:src="@{${piattaforma.logo}}">
+            </div></div>
+        </div>
+      </div></div>
+
+
+</div>
+
+    <!-- Script Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

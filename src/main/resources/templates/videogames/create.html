@@ -17,6 +17,20 @@
             <label for="${piattaforma}">
             <div th:text="${piattaforma.nomePiattaforma}"></div></label>
         </div>
+
+         <!-- Select genere -->
+         <div class="mb-3 mt-3">
+            <label class="form-label" for="genere">Genere</label>
+            <select class="form-select" id="genere" th:field="*{genere}">
+                <option value="" disabled selected>Seleziona un genere</option>
+                <option th:each="genere : ${generi}" 
+                        th:value="${genere.id}" 
+                        th:text="${genere.nameGenere}">
+                </option>
+            </select>
+        </div>
+
+
            
         <div class="mb-3 ps-2" th:if="${#fields.hasErrors()}">
           <ul class="alert alert-danger">

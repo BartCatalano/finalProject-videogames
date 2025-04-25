@@ -22,11 +22,16 @@
                         <p class="card-text">
                             Prezzo: <span th:text="${videogame.prezzo}"></span>
                         </p>
+                        <div th:each="genere : ${videogame.getGenere()}"> Genere:
+                            <h4 th:text="${genere.nameGenere}"></h4>
+                        </div>
                         <div class="row">
                         <div class="col-md-3 mb-4" th:each="piattaforma : ${videogame.getPiattaforma()}">
                             <img class="card-img-top mx-auto mt-3 " style="max-width: 20px; max-height: 20px; object-fit: contain;" alt="logo piattaforma" th:src="@{${piattaforma.logo}}">
                         </div></div>
                         <div class="d-flex gap-2">
+                            <!-- tato per dettaglio -->
+                            <a style="height: 38px;" class="btn btn-primary btn-sm" th:href="@{/videogames/{id} (id=${videogame.id})}" th:text="dettaglio"></a>
                             <!-- creo il tasto per modificare il videogame  -->
                             <a style="height: 38px;" class="btn btn-info btn-sm"
                                 th:href="@{/videogames/edit/{id} (id=${videogame.id})}">Modifica</a>

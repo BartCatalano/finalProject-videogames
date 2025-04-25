@@ -2,6 +2,7 @@ package org.lesson.java.videogames.videogames.controller;
 
 import java.util.List;
 import org.lesson.java.videogames.videogames.model.Videogame;
+import org.lesson.java.videogames.videogames.repository.GenereRepository;
 import org.lesson.java.videogames.videogames.repository.PiattaformaRepository;
 import org.lesson.java.videogames.videogames.repository.VideogameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -33,6 +34,8 @@ public class VideogameController {
     private VideogameRepository videogameRepository;
     @Autowired
     private PiattaformaRepository piattaformaRepository;
+    @Autowired
+    private GenereRepository genereRepository;
 
     // inizio con la index
 
@@ -42,6 +45,7 @@ public class VideogameController {
         List<Videogame> videogame = videogameRepository.findAll();
         model.addAttribute("videogames",videogame);
         model.addAttribute("piattaforme", piattaformaRepository.findAll());
+        model.addAttribute("generi", genereRepository.findAll());
         return "videogames/index";
     }
 
@@ -52,6 +56,7 @@ public class VideogameController {
         // creo un oggetto vuoto di tipo videogame
         model.addAttribute("videogame", new Videogame());
         model.addAttribute("piattaforme", piattaformaRepository.findAll());
+        model.addAttribute("generi", genereRepository.findAll());
         // mando la pagina html del create
         return "videogames/create";
     }
@@ -73,6 +78,7 @@ public class VideogameController {
         // al model uso la repo per prendere per id
         model.addAttribute("videogame", videogameRepository.findById(id).get());
         model.addAttribute("piattaforme", piattaformaRepository.findAll());
+        model.addAttribute("generi", genereRepository.findAll());
          return "videogames/edit";
     }
 
@@ -92,6 +98,27 @@ public class VideogameController {
         videogameRepository.deleteById(id);
         return "redirect:/videogames";
     }
+
+    // SHOW/DETTAGLIO
+// per creare lo show della pizza selezionata ho bisogno di tutta la lista e poi paragonare l'id selezionato con un ciclo for, quando lo trova mi restituisce il videogame che corrisponde lo salvo nel model e e lo mostro in pagina
+    @GetMapping("/{id}")
+    public String dettaglioVideogame(@PathVariable Integer id, Model model) {
+        // prendo tutti i videogame
+        List<Videogame> videogames = videogameRepository.findAll();
+        // ora li ciclo per controllarli tutti
+        for (Videogame videogame : videogames){
+            // costrutto if per la corrispondenza
+            if(videogame.getId() == id){
+                // ora al model aggiungo il videogame corrispondente
+                model.addAttribute("videogame", videogame);
+                model.addAttribute("piattaforme", piattaformaRepository.findAll());
+                return "videogames/dettaglio";
+            }  } 
+        // nel model inserisco il non trovato in caso di mancanza di corrispondenza
+            model.addAttribute("videogame", + id + "non trovato");
+            return "/videogames";
+    }
+    
     
     
 

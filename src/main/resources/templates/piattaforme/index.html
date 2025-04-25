@@ -18,6 +18,7 @@
                         <p class="card-text fw-bold" th:text="${piattaforma.nomePiattaforma}"></p>
                         <p class="card-text text-muted" th:text="${piattaforma.prezzoPiattaforma} + ' €'"></p>
                     </div>
+                    
     
                     <div class="card-footer d-flex gap-2">
                         <form th:action="@{/piattaforme/delete/{id}(id=${piattaforma.id})}" method="post" class="w-100">
@@ -30,6 +31,7 @@
                 </div>
             </div>
         </div>
+        <div th:replace="~{fragments/fragments :: button('/piattaforme/create', 'New Piattaforma')}"></div>
     </div>
     
 

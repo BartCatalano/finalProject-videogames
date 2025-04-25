@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Index piattaforme</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div th:replace="~{fragments/navBar :: navbar}"></div>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Elenco Generi disponibili:</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="col" th:each="genere : ${generi}">
+                <div class="card h-100 text-center">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <h2 class="card-text fw-bold" th:text="${genere.nameGenere}"></h2>
+                        <p class="card-text fw-bold" th:text="${genere.descrizioneGenere}"></p>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                    <form th:action="@{/generi/delete/{id}(id=${genere.id})}" method="post" class="w-100">
+                        <button class="btn btn-danger btn-sm w-100" type="submit" style="height: 30px;">Delete</button>
+                    </form>
+                    <a class="btn btn-warning btn-sm w-100" th:href="@{/generi/edit/{id}(id=${genere.id})}" style="height: 30px;">
+                        Modifica
+                    </a></div>
+                </div>
+                </div>
+            </div><div th:replace="~{fragments/fragments :: button('/generi/create', 'New Genere')}"></div>
+        </div>
+    <!-- Script Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
