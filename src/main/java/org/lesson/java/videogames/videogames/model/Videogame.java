@@ -3,6 +3,8 @@ package org.lesson.java.videogames.videogames.model;
 import java.math.BigDecimal;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +19,8 @@ import jakarta.validation.constraints.NotNull;
 
 // inserisco annotation che rende un entità la classe videogame
 @Entity
+// inserisco l'ordine in cui i dati vengono visualizzati nel json
+@JsonPropertyOrder({ "id", "title", "descrizione", "foto", "prezzo", "piattaforme", "genere" })
 public class Videogame {
 
 

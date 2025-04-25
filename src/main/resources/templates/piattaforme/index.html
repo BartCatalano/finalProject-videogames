@@ -22,16 +22,16 @@
     
                     <div class="card-footer d-flex gap-2">
                         <form th:action="@{/piattaforme/delete/{id}(id=${piattaforma.id})}" method="post" class="w-100">
-                            <button class="btn btn-danger btn-sm w-100" type="submit" style="height: 38px;">Delete</button>
+                            <button sec:authorize="hasAuthority('ADMIN')" class="btn btn-danger btn-sm w-100" type="submit" style="height: 38px;">Delete</button>
                         </form>
-                        <a class="btn btn-warning btn-sm w-100" th:href="@{/piattaforme/edit/{id}(id=${piattaforma.id})}" style="height: 38px;">
+                        <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-warning btn-sm w-100" th:href="@{/piattaforme/edit/{id}(id=${piattaforma.id})}" style="height: 38px;">
                             Modifica
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div th:replace="~{fragments/fragments :: button('/piattaforme/create', 'New Piattaforma')}"></div>
+        <div sec:authorize="hasAuthority('ADMIN')" th:replace="~{fragments/fragments :: button('/piattaforme/create', 'New Piattaforma')}"></div>
     </div>
     
 

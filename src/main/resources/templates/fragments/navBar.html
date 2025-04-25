@@ -25,16 +25,21 @@
                         <div th:replace="~{fragments/fragments :: button('/videogames', 'Game List')}"></div>
                     </li>
                     <li class="nav-item">
-                        <div th:replace="~{fragments/fragments :: button('/generi', 'Generi')}"></div>
+                        <div  th:replace="~{fragments/fragments :: button('/generi', 'Generi')}"></div>
                     </li>
                     <li class="nav-item">
-                        <div th:replace="~{fragments/fragments :: button('/piattaforme', 'Piattaforme')}"></div>
+                        <div  th:replace="~{fragments/fragments :: button('/piattaforme', 'Piattaforme')}"></div>
                     </li>
                     <li class="nav-item">
-                        <div th:replace="~{fragments/fragments :: button('/videogames/create', 'New Videogame')}"></div>
+                        <div sec:authorize="hasAuthority('ADMIN')"  th:replace="~{fragments/fragments :: button('/videogames/create', 'New Videogame')}"></div>
                     </li>
                 </ul>
             </div>
+            <div class="user-info">  
+				Logged user: <span sec:authentication="name" class="fw-bold me-2"></span>
+				Roles: <span sec:authentication="principal.authorities" class="fst-italic me-2"></span>
+				<a href="/logout" class="btn btn-danger">Logout</a>
+			</div>
         </nav>
     </div>
 </body>

@@ -1,10 +1,7 @@
 package org.lesson.java.videogames.videogames.service;
-
 import java.util.List;
 import java.util.Optional;
-
 import org.lesson.java.videogames.videogames.model.Genere;
-import org.lesson.java.videogames.videogames.model.Piattaforma;
 import org.lesson.java.videogames.videogames.repository.GenereRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

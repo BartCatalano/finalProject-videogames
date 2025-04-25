@@ -1,6 +1,9 @@
 package org.lesson.java.videogames.videogames.model;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +16,7 @@ public class Genere {
 
     // creo relazione manyToOne con videogames
     @OneToMany(mappedBy = "genere")
+    @JsonBackReference
     private List<Videogame> videogame;
 
     // getter e setter di videogame per rendere bidirezionale

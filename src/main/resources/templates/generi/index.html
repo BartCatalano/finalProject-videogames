@@ -20,14 +20,14 @@
                     </div>
                     <div class="card-footer d-flex gap-2">
                     <form th:action="@{/generi/delete/{id}(id=${genere.id})}" method="post" class="w-100">
-                        <button class="btn btn-danger btn-sm w-100" type="submit" style="height: 30px;">Delete</button>
+                        <button sec:authorize="hasAuthority('ADMIN')" class="btn btn-danger btn-sm w-100" type="submit" style="height: 30px;">Delete</button>
                     </form>
-                    <a class="btn btn-warning btn-sm w-100" th:href="@{/generi/edit/{id}(id=${genere.id})}" style="height: 30px;">
+                    <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-warning btn-sm w-100" th:href="@{/generi/edit/{id}(id=${genere.id})}" style="height: 30px;">
                         Modifica
                     </a></div>
                 </div>
                 </div>
-            </div><div th:replace="~{fragments/fragments :: button('/generi/create', 'New Genere')}"></div>
+            </div><div sec:authorize="hasAuthority('ADMIN')" th:replace="~{fragments/fragments :: button('/generi/create', 'New Genere')}"></div>
         </div>
     <!-- Script Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
