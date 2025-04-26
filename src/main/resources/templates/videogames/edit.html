@@ -37,9 +37,11 @@
       </div>   
             <label class="form-label" for="title">Nome Videogame</label>
             <input class="form-control" type="text" id="title" th:field="*{title}">
+            <p class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
              
             <label class="form-label" for="descrizione">descrizione</label>
             <input class="form-control" type="text" id="descrizione" th:field="*{descrizione}">
+            <p class="text-danger" th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></p>
             <div class="mb-3">
 
                 <label class="form-label" for="foto">Foto</label>
@@ -49,6 +51,7 @@
             <div class="mb-3">
                 <label class="form-label" for="prezzo">Prezzo</label>
                 <input type="number" step="0.01" name="prezzo"th:field="*{prezzo}" class="form-control" />
+                <p class="text-danger" th:if="${#fields.hasErrors('prezzo')}" th:errors="*{prezzo}"></p>
             </div>
            <!-- creo il tasto submit che sovrascrive il videogame -->
         <button type="submit" class="btn btn-primary mt-3">

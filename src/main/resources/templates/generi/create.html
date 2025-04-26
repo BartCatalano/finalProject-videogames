@@ -1,38 +1,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>Create Generi</title>
 </head>
+
 <body>
     <!-- Navbar -->
     <div th:replace="~{fragments/navBar :: navbar}"></div>
-<h1>sono Create Generi</h1>    
+    <h1>sono Create Generi</h1>
 
 
-<h1 class="text-center">Sono pagina di Creazione generi</h1>
-<div class="text-center row justify-content-center">
-    <!-- creo il form di creazione con action base a differenza dell update dove prendo l id -->
-    <form id="genereForm" th:action="@{/generi/create}" method="post" th:object="${genere}">
+    <h1 class="text-center">Sono pagina di Creazione generi</h1>
+    <div class="text-center row justify-content-center">
+        <!-- creo il form di creazione con action base a differenza dell update dove prendo l id -->
+        <form id="genereForm" th:action="@{/generi/create}" method="post" th:object="${genere}">
 
-       
-        <div class="mb-3 ps-2" th:if="${#fields.hasErrors()}">
-          <ul class="alert alert-danger">
-              <li th:each="error : ${#fields.allErrors()}" th:text="${error}"/>
-          </ul>
-      </div>   
-      <div>
-            <label class="form-label" for="title">nome Genere</label>
-            <input class="form-control" type="text" id="title" th:field="*{nameGenere}">
-            <label class="form-label" for="descrizione">Descrizione Genere</label>
-            <input class="form-control" type="text" id="descrizione" th:field="*{descrizioneGenere}">
-       <button type="submit" class="btn btn-primary mt-3">
-            Inserisci nuovo genere
-         </button>
-    </form></div> 
+
+            <div class="mb-3 ps-2" th:if="${#fields.hasErrors()}">
+                <ul class="alert alert-danger">
+                    <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
+                </ul>
+            </div>
+            <div>
+                <label class="form-label" for="title">nome Genere</label>
+                <input class="form-control" type="text" id="title" th:field="*{nameGenere}">
+                <label class="form-label" for="descrizione">Descrizione Genere</label>
+                <input class="form-control" type="text" id="descrizione" th:field="*{descrizioneGenere}">
+
+                <button type="submit" class="btn btn-primary mt-3">
+                    Inserisci nuovo genere
+                </button>
+        </form>
+    </div>
 
     <!-- Script Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

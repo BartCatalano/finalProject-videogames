@@ -69,6 +69,9 @@ private GenereService geService;
     // inserisco la validazione e lego i campi del form all oggetto videogame
     public String saveVideogame(@Valid @ModelAttribute ("videogame") Videogame videogameForm, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
+            // passo nuovamente piattaforme e generi per evitare che in caso di errore si svuotino i campi
+            model.addAttribute("piattaforme", piService.findAllPiattaforma());
+            model.addAttribute("generi", geService.findAllGenere());
             return "videogames/create";}
             videoService.create(videogameForm);
         
@@ -90,6 +93,9 @@ private GenereService geService;
     // inserisco la validazione e recupero i campi del form dell oggetto videogame per poterli modificare e poi salvo il risultato
     public String saveEditVideogame(@Valid @ModelAttribute("videogame") Videogame forVideogame, BindingResult bindingResult,Model model) {
          if(bindingResult.hasErrors()){
+              // passo nuovamente piattaforme e generi per evitare che in caso di errore si svuotino i campi
+              model.addAttribute("piattaforme", piService.findAllPiattaforma());
+              model.addAttribute("generi", geService.findAllGenere());
             return "videogames/edit";
          }
          videoService.create(forVideogame);

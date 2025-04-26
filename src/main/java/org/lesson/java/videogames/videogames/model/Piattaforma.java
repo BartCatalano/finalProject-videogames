@@ -35,12 +35,12 @@ public class Piattaforma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "inserire il titolo del videogames")
+    @NotBlank(message = "inserire il titolo della piattaforma")
     private String nomePiattaforma;
     
     private String logo;
 
-    @NotNull(message = "inserire prezzo del videogame")
+    @NotNull(message = "inserire prezzo della piattaforma più recente")
     private BigDecimal prezzoPiattaforma; 
 
 
